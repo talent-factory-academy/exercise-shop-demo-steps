@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+/*styles.css*/
+html, body {
+  background: rgb(212,212,212);
+  background: linear-gradient(187deg, rgba(212,212,212,1) 0%, rgba(255,255,255,1) 100%);
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+.round-border {
+  border-radius: 30px;
+}
+
+.icon-circle-sm {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+i.icon-circle-sm {
+  padding: 5px;
+}

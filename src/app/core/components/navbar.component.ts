@@ -20,6 +20,8 @@ import { Component } from '@angular/core';
         </div>
       </div>
     </nav>
+
+    <ac-notification></ac-notification>
   `,
 })
 export class NavbarComponent {}

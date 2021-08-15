@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NavbarComponent } from './core/components/navbar.component';
+import { NotificationComponent } from './core/components/notification.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'ac-shop-newsletter',
@@ -41,7 +42,7 @@ export class ShopNewsletterComponent {
 
   subscribed: string | null = null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private notificationService: NotificationService) {
     this.subscribed = localStorage.getItem('subscribed');
   }
 
@@ -51,6 +52,7 @@ export class ShopNewsletterComponent {
         if (res.response === 'ok') {
           this.subscribed = email;
           localStorage.setItem('subscribed', email);
+          this.notificationService.show('User subscribed!')
         }
       })
   }

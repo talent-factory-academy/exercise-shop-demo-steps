@@ -3,9 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ac-root',
   template: `
-    <button (click)="page = 'shop'">SHOP</button>
-    <button (click)="page = 'cart'">CART</button>
-    <button (click)="page = 'backoffice'">BACKOFFICE</button>
+    <ac-navbar (selectPage)="page = $event"></ac-navbar>
 
     <ac-shop *ngIf="page === 'shop'"></ac-shop>
     <ac-cart *ngIf="page === 'cart'"></ac-cart>
@@ -13,5 +11,5 @@ import { Component } from '@angular/core';
   `,
 })
 export class AppComponent {
-  page: 'cart' | 'shop' | 'backoffice' = 'backoffice';
+  page: 'cart' | 'shop' | 'backoffice' = 'shop';
 }

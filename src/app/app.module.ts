@@ -7,12 +7,14 @@ import { FormsModule } from "@angular/forms";
 import { ShopComponent } from './features/shop/shop.component';
 import { CartComponent } from './features/cart/cart.component';
 import { HttpClientModule } from "@angular/common/http";
+import { BackofficeComponent } from './features/backoffice/backoffice.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShopComponent,
-    CartComponent
+    CartComponent,
+    BackofficeComponent
   ],
   imports: [
     BrowserModule,

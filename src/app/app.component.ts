@@ -5,11 +5,13 @@ import { Component } from '@angular/core';
   template: `
     <button (click)="page = 'shop'">SHOP</button>
     <button (click)="page = 'cart'">CART</button>
+    <button (click)="page = 'backoffice'">BACKOFFICE</button>
 
     <ac-shop *ngIf="page === 'shop'"></ac-shop>
     <ac-cart *ngIf="page === 'cart'"></ac-cart>
+    <ac-backoffice *ngIf="page === 'backoffice'"></ac-backoffice>
   `,
 })
 export class AppComponent {
-  page: 'cart' | 'shop' = 'shop';
+  page: 'cart' | 'shop' | 'backoffice' = 'backoffice';
 }

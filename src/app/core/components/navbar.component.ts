@@ -1,21 +1,25 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ac-navbar',
   template: `
-    <button (click)="selectPage.emit('shop')">SHOP</button>
-    <button (click)="selectPage.emit('cart')">CART</button>
-    <button (click)="selectPage.emit('backoffice')">BACKOFFICE</button>
+    <nav class="navbar navbar-light bg-light sticky-top shadow-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">
+          <i class="fab fa-shopify"></i> My Shop
+        </a>
+        <div class="d-flex">
+          <button class="btn btn-outline-dark mx-2" routerLink="backoffice">
+            <i class="fas fa-lock"></i>
+            Admin
+          </button>
+          <button class="btn btn-outline-dark" >
+            <i class="fas fa-cart-plus"></i>
+            Cart 
+          </button>
+        </div>
+      </div>
+    </nav>
   `,
-  styles: [
-  ]
 })
-export class NavbarComponent implements OnInit {
-  @Output() selectPage = new EventEmitter<'cart' | 'shop' | 'backoffice'>();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class NavbarComponent {}

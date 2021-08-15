@@ -10,6 +10,7 @@ import { Product } from '../../../model/product';
           class="card-img-top p-3 round-border "
           [src]="product.image"  [alt]="product.label"
           role="button"
+          [routerLink]="'/product/' + product.id"
         >
         <div class="position-absolute top-50 start-50 w-75 translate-middle pe-none">
           <div class="row  row-cols-3 g-2 rounded p-2 text-white" style="background: rgba(0,0,0,0.5)">
@@ -36,21 +37,11 @@ import { Product } from '../../../model/product';
         <p class="card-text text-secondary">{{product.description}}</p>
       </div>
 
-
-
-      <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
-        <div
-          class="mx-1 mb-3 round-border shadow-sm"
-          style="width: 30px; height: 30px; border: 1px solid #fff"
-          role="button"
-          *ngFor="let color of product.colors"
-          (click)="selectedColor = color"
-          [style.backgroundColor]="color"
-          [style.border-width.px]="selectedColor === color ? 5 : 1"
-          [style.border-color]="selectedColor === color ? 'orange' : '#ccc'"
-        ></div>
-      </div>
-
+      <ac-color-picker
+        [colors]="product.colors"
+        [selectedColor]="selectedColor"
+        (selectColor)="selectedColor = $event"
+      ></ac-color-picker>
 
 
       <div class="card-footer d-flex justify-content-between align-items-center">

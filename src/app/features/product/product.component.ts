@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../model/product';
 import { HttpClient } from '@angular/common/http';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'ac-product',
@@ -11,6 +12,23 @@ import { HttpClient } from '@angular/common/http';
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">{{product?.description}}</p>
 
+        <ac-color-picker
+          *ngIf="product"
+          [colors]="product.colors"
+          [selectedColor]="selectedColor"
+          (selectColor)="selectedColor = $event"
+        ></ac-color-picker>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <button
+            type="button"
+            class="btn btn-lg px-4"
+            [ngClass]="{'btn-outline-primary': selectedColor, 'btn-outline-secondary': !selectedColor}"
+            (click)="addToCartHandler()"
+          >
+            {{selectedColor ? 'Order Now' : 'Select a Color'}}
+          </button>
+        </div>
       </div>
       <div>
         <img [src]="product?.image" class="shadow-lg p-4" width="100%" style="max-width: 50vh; margin: 0 auto">
@@ -25,7 +43,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +54,8 @@ export class ProductComponent implements OnInit {
   }
 
   addToCartHandler(): void {
-    console.log(this.product, this.selectedColor)
+    if (this.product && this.selectedColor) {
+      this.cartService.addItem(this.product, this.selectedColor);
+    }
   }
 }

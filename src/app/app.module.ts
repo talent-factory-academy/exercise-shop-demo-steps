@@ -8,12 +8,14 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NavbarComponent } from './core/components/navbar.component';
 import { NotificationComponent } from './core/components/notification.component';
+import { NavbarCartPanelComponent } from './core/components/navbar-cart-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     NotificationComponent,
+    NavbarCartPanelComponent,
   ],
   imports: [
     BrowserModule,

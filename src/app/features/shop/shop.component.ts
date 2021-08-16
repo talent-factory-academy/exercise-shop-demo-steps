@@ -4,6 +4,7 @@ import {News} from "../../model/news";
 import {Hero} from "../../model/hero";
 import {HttpClient} from "@angular/common/http";
 import { NotificationService } from '../../core/services/notification.service';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'ac-shop',
@@ -38,7 +39,7 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public notificationService: NotificationService
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -54,9 +55,7 @@ export class ShopComponent implements OnInit {
   }
 
   addToCartHandler(params: { product: Product; color: string | null }) {
-    console.log(params.product, params.color);
-    this.notificationService.show('Add To Cart');
-
+    this.cartService.addItem(params.product, params.color);
   }
 
 }

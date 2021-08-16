@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgModel} from "@angular/forms";
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'ac-cart',
@@ -12,12 +13,46 @@ import { NgModel} from "@angular/forms";
         <p class="lead">Fill all fields and order now. Free shipping</p>
       </div>
 
-      <!--MESSAGE PLACEHOLDER-->
+      <div class="text-center mt-4 h3" *ngIf="!cartService.items.length">
+        No products in your cart
+      </div>
 
-      <div class="row g-5">
+      <div class="row g-5" *ngIf="cartService.items.length">
         <div class="col-md-5 col-lg-4 order-md-last">
-          <!--CART SUMMARY PLACEHOLDER-->
-          Cart Summary
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your cart</span>
+            <span class="badge bg-primary rounded-pill">
+              TOTAL € {{cartService.getTotalCartAmount()}}
+            </span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li
+              class="list-group-item d-flex justify-content-between lh-sm"
+              *ngFor="let item of cartService.items"
+            >
+              <div>
+                <i class="fas fa-trash fa-2x me-2" (click)="cartService.removeItem(item)"></i>
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="my-0">{{item.product.label}} - {{item.color}}</h6>
+                <small class="text-muted">
+
+                  € {{item.product.price * item.quantity}}
+
+                </small>
+              </div>
+              <span class="text-muted">
+                <button class="bg-dark text-white icon-circle-sm" (click)="cartService.decreaseQuantity(item)">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span class="h mx-2">{{item.quantity}}</span>
+                <button class="bg-dark text-white icon-circle-sm" (click)="cartService.incrementQuantity(item)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </span>
+              
+            </li>
+          </ul>
         </div>
 
         <form #f="ngForm" (submit)="submitHandler(f.value)" class="col-md-7 col-lg-8">
@@ -151,9 +186,10 @@ import { NgModel} from "@angular/forms";
   ]
 })
 export class CartComponent {
+  constructor(public cartService: CartService) { }
 
   submitHandler(formData: any) {
-    console.log(formData)
+    this.cartService.orderNow(formData)
   }
 
   checkField(input: NgModel) {

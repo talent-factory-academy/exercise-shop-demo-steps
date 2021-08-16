@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'ac-navbar',
@@ -13,15 +14,24 @@ import { Component } from '@angular/core';
             <i class="fas fa-lock"></i>
             Admin
           </button>
-          <button class="btn btn-outline-dark" >
+          <button class="btn btn-outline-dark" routerLink="cart" (mouseover)="showCartPreview = true">
             <i class="fas fa-cart-plus"></i>
-            Cart 
+            Cart (€ {{cartService.getTotalCartAmount()}})
           </button>
         </div>
       </div>
     </nav>
 
     <ac-notification></ac-notification>
+
+    <ac-navbar-cart-panel
+      *ngIf="showCartPreview"
+      (mouseleave)="showCartPreview = false"
+    ></ac-navbar-cart-panel>  
   `,
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  showCartPreview: boolean = false;
+
+  constructor(public cartService: CartService) { }
+}
